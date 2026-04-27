@@ -81,3 +81,13 @@ Content-Type: application/json
 
 ### ✅ 3. Lister toutes les interventions
 GET {{baseUrl}}/api/interventions
+
+### ❌ Sem API Key → 401
+GET {{baseUrl}}/api/interventions
+
+### ✅ Com API Key → 200
+GET {{baseUrl}}/api/interventions
+x-api-key: techintervention2026
+
+### ❌ Sem API Key → 401
+GET {{baseUrl}}/api/interventions

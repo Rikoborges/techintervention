@@ -4,9 +4,11 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 
+
 import conectarDB from './config/db.js';
 import interventionRoutes from './routes/Intervention.routes.js';
 import { errorHandler, notFound } from './middlewares/errorHandler.js';
+import { verificarApiKey } from './middlewares/apiKey.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -32,7 +34,8 @@ app.get('/api', (req, res) => {
 });
 
 // Routes métier
-app.use('/api/interventions', interventionRoutes);
+app.use('/api/interventions', verificarApiKey, interventionRoutes);
+
 
 // Gestion des erreurs (toujours en dernier)
 app.use(notFound);
