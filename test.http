@@ -1,0 +1,83 @@
+@baseUrl = http://localhost:3000
+
+### ✅ Health Check
+GET {{baseUrl}}/
+
+###
+
+### ✅ 1. Créer une intervention valide
+POST {{baseUrl}}/api/interventions
+Content-Type: application/json
+
+{
+  "technicien": "Jean Dupont",
+  "client": "Résidence Les Pins",
+  "typeIntervention": "fibre_optique",
+  "adresse": "12 rue de la Paix, 75001 Paris",
+  "dateIntervention": "2025-09-15T09:00:00.000Z",
+  "priorite": "haute",
+  "notes": "Accès par le gardien"
+}
+
+###
+
+### ❌ 2. Teste erro validação
+POST {{baseUrl}}/api/interventions
+Content-Type: application/json
+
+{
+  "technicien": "A",
+  "typeIntervention": "invalide"
+}
+
+###
+
+### ✅ 3. Lister toutes les interventions
+GET {{baseUrl}}/api/interventions
+
+###
+
+### ✅ 4. Filtrar por statut
+GET {{baseUrl}}/api/interventions?statut=en_attente
+
+###
+
+### ✅ 5. Détail intervention #1
+GET {{baseUrl}}/api/interventions/1
+
+###
+
+### ✅ 6. Mettre à jour statut → en_cours
+PATCH {{baseUrl}}/api/interventions/1/status
+Content-Type: application/json
+
+{
+  "statut": "en_cours"
+}
+
+###
+
+### ✅ 7. Supprimer intervention #1
+DELETE {{baseUrl}}/api/interventions/1
+
+###
+
+### ❌ 8. Route inexistante → 404
+GET {{baseUrl}}/api/toto
+
+### ✅ PUT — Modifier une intervention complète
+PUT {{baseUrl}}/api/interventions/COLOCA_O_ID_AQUI
+Content-Type: application/json
+
+{
+  "technicien": "Marie Martin",
+  "client": "Résidence Les Pins",
+  "typeIntervention": "electricite",
+  "adresse": "12 rue de la Paix, 75001 Paris",
+  "dateIntervention": "2025-10-01T09:00:00.000Z",
+  "priorite": "urgente",
+  "notes": "Intervention modifiée"
+}
+
+### ✅ 3. Lister toutes les interventions
+GET {{baseUrl}}/api/interventions
