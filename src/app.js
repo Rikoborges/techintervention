@@ -15,12 +15,15 @@ const PORT = process.env.PORT || 3000;
 conectarDB();
 
 // Middlewares globaux
-app.use(helmet());
+app.use(express.static('public'));
+app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors());
 app.use(express.json())
 
+
+
 // Route de santé
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.json({
     api: 'InterventionConnect API',
     version: '1.0.0',

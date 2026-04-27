@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InterventionConnect</title>
+ 
+</head>
+<body>
+
+  <header>
+    <h1>🔧 InterventionConnect</h1>
+    <p>Gestion des interventions techniques</p>
+  </header>
+
+  <div class="container">
+
+    <!-- Formulaire création -->
+    <div class="card">
+      <div class="card-title">Nouvelle intervention</div>
+      <div class="form-grid">
+        <div class="field">
+          <label>Technicien</label>
+          <input type="text" id="technicien" placeholder="Jean Dupont">
+        </div>
+        <div class="field">
+          <label>Client</label>
+          <input type="text" id="client" placeholder="Résidence Les Pins">
+        </div>
+        <div class="field">
+          <label>Type d'intervention</label>
+          <select id="typeIntervention">
+            <option value="fibre_optique">Fibre optique</option>
+            <option value="electricite">Électricité</option>
+            <option value="hydraulique">Hydraulique</option>
+            <option value="climatisation">Climatisation</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Priorité</label>
+          <select id="priorite">
+            <option value="basse">Basse</option>
+            <option value="normale" selected>Normale</option>
+            <option value="haute">Haute</option>
+            <option value="urgente">Urgente</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label>Adresse</label>
+          <input type="text" id="adresse" placeholder="12 rue de la Paix, 75001 Paris">
+        </div>
+        <div class="field full">
+          <label>Date d'intervention</label>
+          <input type="datetime-local" id="dateIntervention">
+        </div>
+        <div class="field full">
+          <label>Notes (optionnel)</label>
+          <input type="text" id="notes" placeholder="Informations complémentaires...">
+        </div>
+      </div>
+      <button class="btn" onclick="creerIntervention()">Créer l'intervention</button>
+      <div class="msg" id="msg"></div>
+    </div>
+
+    <!-- Liste interventions -->
+    <div class="card">
+      <div class="list-header">
+        <div class="card-title" style="margin:0">Interventions</div>
+        <div class="filters">
+          <select id="filtreStatut" onchange="chargerInterventions()">
+            <option value="">Tous les statuts</option>
+            <option value="en_attente">En attente</option>
+            <option value="en_cours">En cours</option>
+            <option value="termine">Terminé</option>
+            <option value="annule">Annulé</option>
+          </select>
+          <select id="filtreType" onchange="chargerInterventions()">
+            <option value="">Tous les types</option>
+            <option value="fibre_optique">Fibre optique</option>
+            <option value="electricite">Électricité</option>
+            <option value="hydraulique">Hydraulique</option>
+            <option value="climatisation">Climatisation</option>
+          </select>
+          <button class="btn-sm" onclick="chargerInterventions()">↻ Actualiser</button>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Technicien</th>
+            <th>Client</th>
+            <th>Type</th>
+            <th>Priorité</th>
+            <th>Statut</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody id="liste">
+          <tr><td colspan="6" class="empty">Chargement...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+ <script src="script.js"></script>
+
+</body>
+</html>
